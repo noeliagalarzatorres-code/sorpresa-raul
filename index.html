@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>🎉 Raúl 60 años 🎁</title>
+</head>
+
+<body style="font-family:Arial;text-align:center;padding:30px;background:#dff6ff;">
+
+<h1>🎉 Los 60 de Raúl 🎉</h1>
+
+<h2 id="pregunta"></h2>
+
+<div id="respuestas"></div>
+
+<script>
+
+const preguntas = [
+
+{
+texto:"😎 ¿Qué viaje preferís?",
+opciones:[
+{texto:"❄️ Aventura en Ushuaia",puntos:1},
+{texto:"🌊 Relax en Puerto Madryn",puntos:0}
+]
+},
+
+{
+texto:"🧊 ¿Te gusta el frío?",
+opciones:[
+{texto:"💪 Sí, mucho",puntos:1},
+{texto:"🥶 Prefiero calor",puntos:0}
+]
+},
+
+{
+texto:"🐋 ¿Qué plan elegirías?",
+opciones:[
+{texto:"🏔️ Montañas y aventura",puntos:1},
+{texto:"🐳 Ver ballenas tranquilo",puntos:0}
+]
+},
+
+{
+texto:"📸 Tu foto ideal sería...",
+opciones:[
+{texto:"❄️ Paisajes nevados",puntos:1},
+{texto:"🌊 Mar y naturaleza",puntos:0}
+]
+},
+
+{
+texto:"😏 Última pregunta...",
+opciones:[
+{texto:"🌎 Quiero ir al fin del mundo",puntos:1},
+{texto:"🌿 Quiero paz y relax",puntos:0}
+]
+}
+
+];
+
+let actual = 0;
+let puntos = 0;
+
+function cargarPregunta(){
+
+document.getElementById("pregunta").innerHTML =
+preguntas[actual].texto;
+
+const respuestas =
+document.getElementById("respuestas");
+
+respuestas.innerHTML = "";
+
+preguntas[actual].opciones.forEach(opcion=>{
+
+const boton = document.createElement("button");
+
+boton.innerHTML = opcion.texto;
+
+boton.style.width="100%";
+boton.style.padding="15px";
+boton.style.margin="10px";
+boton.style.fontSize="18px";
+boton.style.borderRadius="10px";
+boton.style.border="none";
+boton.style.background="#ff7b54";
+boton.style.color="white";
+
+boton.onclick=()=>{
+
+puntos += opcion.puntos;
+
+actual++;
+
+if(actual < preguntas.length){
+
+cargarPregunta();
+
+}else{
+
+mostrarResultado();
+
+}
+
+};
+
+respuestas.appendChild(boton);
+
+});
+
+}
+
+function mostrarResultado(){
+
+if(puntos >= 3){
+
+document.body.innerHTML = `
+<h1>🎉 RAÚL TE VAS A USHUAIA ❄️</h1>
+
+<h2>🎁 REGALO DE TUS HIJOS ❤️</h2>
+
+<p style="font-size:22px;">
+🌎 Aventura en el fin del mundo 😎
+</p>
+
+<p style="font-size:18px;">
+🚢 Navegación increíble<br><br>
+🏔️ Paisajes únicos<br><br>
+❄️ Una experiencia inolvidable
+</p>
+`;
+
+}else{
+
+document.body.innerHTML = `
+<h1>🎉 RAÚL TE VAS A PUERTO MADRYN 🌊</h1>
+
+<h2>🎁 REGALO DE TUS HIJOS ❤️</h2>
+
+<p style="font-size:22px;">
+🐋 Naturaleza y relax 😎
+</p>
+
+<p style="font-size:18px;">
+🐳 Ballenas increíbles<br><br>
+🌊 Mar y tranquilidad<br><br>
+☀️ Un viaje inolvidable
+</p>
+`;
+
+}
+
+}
+
+cargarPregunta();
+
+</script>
+
+</body>
+</html>
