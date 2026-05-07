@@ -2,51 +2,87 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎉 Sorpresa para Raúl 🎁</title>
 
 <style>
 
 body{
-font-family:Arial;
-background:linear-gradient(135deg,#84fab0,#8fd3f4);
-text-align:center;
-padding:20px;
 margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(180deg,#84fab0,#8fd3f4);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
 .card{
 background:white;
-max-width:650px;
-margin:auto;
-padding:30px;
+width:92%;
+max-width:430px;
+padding:25px;
+border-radius:25px;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+text-align:center;
+margin:20px 0;
+}
+
+h1{
+font-size:34px;
+margin-bottom:10px;
+color:#333;
+}
+
+h2{
+font-size:30px;
+line-height:1.3;
+margin:20px 0;
+color:#222;
+}
+
+p{
+font-size:20px;
+line-height:1.5;
+}
+
+.question-image{
+width:100%;
+height:240px;
+object-fit:cover;
 border-radius:20px;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
+margin-bottom:20px;
 }
 
 button{
 width:100%;
-padding:15px;
-margin:10px 0;
+padding:18px;
+margin:12px 0;
+font-size:22px;
 border:none;
-border-radius:12px;
+border-radius:18px;
 background:#ff7b54;
 color:white;
-font-size:18px;
 cursor:pointer;
+transition:0.3s;
 }
 
 button:hover{
 background:#ff5722;
+transform:scale(1.02);
 }
 
-img{
+.result-image{
 width:100%;
-border-radius:15px;
-margin-top:20px;
+border-radius:20px;
+margin:20px 0;
 }
 
-h1,h2{
-color:#333;
+.progress{
+font-size:18px;
+margin-bottom:10px;
+color:#555;
 }
 
 </style>
@@ -54,134 +90,233 @@ color:#333;
 
 <body>
 
-<div class="card" id="quiz">
+$1
 
-<h1>🎉 Los 60 de Raúl 🎉</h1>
+<h1>🎉 Feliz Cumpleaños Papá 🎉</h1>
 
-<p>😏 Responde estas preguntas y descubrí tu regalo sorpresa...</p>
+<p style="font-size:22px; line-height:1.6;">
+❤️ Gracias por cada esfuerzo, cada consejo y cada momento que compartiste con nosotros.<br><br>
+Gracias por trabajar tanto todos estos años para darnos lo mejor y estar siempre ahí cuando te necesitamos.<br><br>
+Hoy queremos devolverte un poquito de todo lo que hiciste por nosotros.<br><br>
+🌟 Porque cumplir 60 años merece una experiencia inolvidable.<br><br>
+🎁 Y porque te lo mereces más que nadie… preparamos una sorpresa especial para ti.
+</p>
 
-<h2 id="pregunta"></h2>
+<img class="result-image" src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1200&auto=format&fit=crop">
 
-<div id="respuestas"></div>
+<button onclick="startQuiz()" style="font-size:28px;padding:20px;width:100%;border:none;border-radius:15px;background:#ff7b54;color:white;">
+😏 ¿ESTÁS LISTO?
+</button>
 
-</div>
+$2
 
-<script>
-
-const preguntas = [
+const questions = [
 
 {
-texto:"😎 ¿Qué plan te atrae más?",
-opciones:[
-{texto:"🏔️ Algo aventurero y único",puntos:1},
-{texto:"🌊 Algo relajado y natural",puntos:0}
+q:"😎 ¿Qué tipo de escapada te gusta más?",
+img:"https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"🏔️ Aventura épica",score:1},
+{text:"🌊 Relax y naturaleza",score:0}
 ]
 },
 
 {
-texto:"🧊 ¿Cómo te llevás con el frío?",
-opciones:[
-{texto:"💪 Me encanta",puntos:1},
-{texto:"☀️ Prefiero clima suave",puntos:0}
+q:"🧊 ¿Cómo te llevás con el frío?",
+img:"https://images.unsplash.com/photo-1483664852095-d6cc6870702d?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"💪 Me encanta",score:1},
+{text:"☀️ Prefiero calor",score:0}
 ]
 },
 
 {
-texto:"📸 ¿Qué foto subirías primero?",
-opciones:[
-{texto:"❄️ Paisajes increíbles",puntos:1},
-{texto:"🐋 Animales y mar",puntos:0}
+q:"📸 ¿Qué foto subirías primero?",
+img:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"❄️ Paisajes extremos",score:1},
+{text:"🐋 Fauna increíble",score:0}
 ]
 },
 
 {
-texto:"🥾 Elegí una actividad:",
-opciones:[
-{texto:"🚢 Explorar lugares épicos",puntos:1},
-{texto:"🌿 Relajarme y disfrutar",puntos:0}
+q:"🥾 Elegí un plan:",
+img:"https://images.unsplash.com/photo-1527631746610-bca00a040d60?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"🚢 Explorar lugares únicos",score:1},
+{text:"🌿 Descansar y disfrutar",score:0}
 ]
 },
 
 {
-texto:"😏 Última pregunta...",
-opciones:[
-{texto:"🌎 Quiero una experiencia inolvidable",puntos:1},
-{texto:"🐳 Quiero naturaleza y tranquilidad",puntos:0}
+q:"😏 ¿Qué te emociona más?",
+img:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"🌎 Sentirme en otro mundo",score:1},
+{text:"🐳 Conectar con la naturaleza",score:0}
+]
+},
+
+{
+q:"🍽️ Elegí una comida ideal:",
+img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"🔥 Algo calentito",score:1},
+{text:"🦞 Mariscos frente al mar",score:0}
+]
+},
+
+{
+q:"🎵 Tu ambiente ideal:",
+img:"https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"🌨️ Silencio y montaña",score:1},
+{text:"🌊 Sonido del mar",score:0}
+]
+},
+
+{
+q:"🚶 ¿Cómo sería tu paseo perfecto?",
+img:"https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"🏔️ Caminando entre montañas",score:1},
+{text:"🐬 Mirando animales",score:0}
+]
+},
+
+{
+q:"☕ Momento favorito:",
+img:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"❄️ Café con frío afuera",score:1},
+{text:"🌅 Mate mirando el mar",score:0}
+]
+},
+
+{
+q:"🧭 ¿Qué palabra te representa más?",
+img:"https://images.unsplash.com/photo-1527631746610-bca00a040d60?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"🌎 Aventura",score:1},
+{text:"🌿 Tranquilidad",score:0}
+]
+},
+
+{
+q:"🚢 ¿Qué experiencia elegirías?",
+img:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"❄️ Navegar entre paisajes increíbles",score:1},
+{text:"🐳 Avistar fauna marina",score:0}
+]
+},
+
+{
+q:"🌄 Tu amanecer ideal:",
+img:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"🏔️ Montañas nevadas",score:1},
+{text:"🌊 Costa y mar",score:0}
+]
+},
+
+{
+q:"😄 ¿Qué plan te suena más divertido?",
+img:"https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"🧥 Abrigo y aventura",score:1},
+{text:"🕶️ Relax y paseo",score:0}
+]
+},
+
+{
+q:"🌟 ¿Qué tipo de recuerdo prefieres?",
+img:"https://images.unsplash.com/photo-1500534623283-312aade485b7?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"❄️ Una historia épica",score:1},
+{text:"🐬 Una experiencia natural",score:0}
+]
+},
+
+{
+q:"🎁 Última pregunta...",
+img:"https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=1200&auto=format&fit=crop",
+a:[
+{text:"🌎 Sorpréndeme con algo único",score:1},
+{text:"🌊 Sorpréndeme con paz y naturaleza",score:0}
 ]
 }
 
 ];
 
-let actual = 0;
-let puntos = 0;
+let current = 0;
+let score = 0;
 
-function cargarPregunta(){
+function loadQuestion(){
 
-document.getElementById("pregunta").innerHTML =
-preguntas[actual].texto;
+const q = questions[current];
 
-const respuestas =
-document.getElementById("respuestas");
+document.getElementById("question").innerHTML = q.q;
 
-respuestas.innerHTML = "";
+document.getElementById("questionImage").src = q.img;
 
-preguntas[actual].opciones.forEach(opcion=>{
+document.getElementById("progress").innerHTML = `Pregunta ${current+1} de ${questions.length}`;
 
-const boton = document.createElement("button");
+const answersDiv = document.getElementById("answers");
 
-boton.innerHTML = opcion.texto;
+answersDiv.innerHTML = "";
 
-boton.onclick = ()=>{
+q.a.forEach(answer=>{
 
-puntos += opcion.puntos;
+const btn = document.createElement("button");
 
-actual++;
+btn.innerHTML = answer.text;
 
-if(actual < preguntas.length){
+btn.onclick = ()=>{
 
-cargarPregunta();
+score += answer.score;
 
+current++;
+
+if(current < questions.length){
+loadQuestion();
 }else{
-
-mostrarResultado();
-
+showResult();
 }
 
 };
 
-respuestas.appendChild(boton);
+answersDiv.appendChild(btn);
 
 });
 
 }
 
-function mostrarResultado(){
+function showResult(){
 
 const quiz = document.getElementById("quiz");
 
-if(puntos >= 3){
+if(score >= 8){
 
 quiz.innerHTML = `
 
 <h1>🎉 RAÚL... TE VAS A USHUAIA ❄️</h1>
 
-<img src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=1200&auto=format&fit=crop">
+<img class="result-image" src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=1200&auto=format&fit=crop">
 
 <h2>🎁 ESTE ES TU REGALO 🎁</h2>
 
-<p style="font-size:22px;">
+<p>
 🌎 Aventura en el fin del mundo 😎
 </p>
 
-<p style="font-size:18px;">
-🚢 Navegación increíble<br><br>
+<p>
+🚢 Navegaciones increíbles<br><br>
 🏔️ Paisajes únicos<br><br>
 ❄️ Una experiencia inolvidable
 </p>
 
-<p style="font-size:22px;">
-❤️ Con amor, de parte de tus hijos ❤️
-</p>
+<h2>❤️ Con amor, de parte de tus hijos ❤️</h2>
 
 `;
 
@@ -191,23 +326,21 @@ quiz.innerHTML = `
 
 <h1>🎉 RAÚL... TE VAS A PUERTO MADRYN 🌊</h1>
 
-<img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=80&w=1200&auto=format&fit=crop">
+<img class="result-image" src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=80&w=1200&auto=format&fit=crop">
 
 <h2>🎁 ESTE ES TU REGALO 🎁</h2>
 
-<p style="font-size:22px;">
+<p>
 🐋 Naturaleza, mar y relax 😎
 </p>
 
-<p style="font-size:18px;">
+<p>
 🐳 Ballenas increíbles<br><br>
 🌊 Paisajes únicos<br><br>
 ☀️ Un viaje inolvidable
 </p>
 
-<p style="font-size:22px;">
-❤️ Con amor, de parte de tus hijos ❤️
-</p>
+<h2>❤️ Con amor, de parte de tus hijos ❤️</h2>
 
 `;
 
@@ -215,7 +348,7 @@ quiz.innerHTML = `
 
 }
 
-cargarPregunta();
+loadQuestion();
 
 </script>
 
